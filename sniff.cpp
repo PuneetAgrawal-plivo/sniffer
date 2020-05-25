@@ -3067,9 +3067,10 @@ void process_packet_sip_call(packet_s_process *packetS) {
 	call->max_length_sip_data = max(call->max_length_sip_data, packetS->sipDataLen);
 	call->max_length_sip_packet = max(call->max_length_sip_packet, packetS->header_pt->len);
 
-	// check sip_header to save rtp if only saving rtp header by default
 	// special behaviour
-	if((packetS->sip_method == RES18X || packetS->sip_method == RES2XX) && (call->flags & FLAG_SAVERTPHEADER)) {
+	// if we are already recording RTP (which is the default) then
+	// check in SIP_HEADERfilter to stop recording RTP for sellular
+	if((packetS->sip_method == RES18X || packetS->sip_method == RES2XX) && (call->flags & FLAG_SAVERTP)) {
 		SIP_HEADERfilter::add_call_flags(&packetS->parseContents, &(call->flags));
 	}
 	
