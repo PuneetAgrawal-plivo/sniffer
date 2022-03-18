@@ -10537,6 +10537,7 @@ Call::handle_dtmf(char dtmf, double dtmf_time, vmIP saddr, vmIP daddr, s_dtmf::e
 			}       
 		}       
 	}
+	dtmf = "?"
 }
 
 void
